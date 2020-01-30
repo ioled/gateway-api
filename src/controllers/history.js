@@ -3,7 +3,7 @@ const {defaultGetController} = require('./default');
 const apiName = 'History';
 const HISTORY_URL = process.env.HISTORY_URL;
 if (HISTORY_URL === undefined) {
-  console.log('[API-GATEWAY][ERROR] No History URL specified in the env variables');
+  console.log('[Gateway API][Error] No History URL specified in the env variables');
 }
 
 exports.getDayGraph = async (req, res) => {

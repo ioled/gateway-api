@@ -2,12 +2,14 @@ const express = require('express');
 const app = express();
 
 // ----- Import all routes here -----
-const historyRoute = require('./history.js');
-const authRoute = require('./auth.js');
+const historyRouter = require('./history.js');
+const authRouter = require('./auth.js');
+const deviceControlRouter = require('./deviceControl.js');
 
 // ----- Use all routes here -----
-app.use(historyRoute);
-app.use(authRoute);
+app.use(historyRouter);
+app.use(authRouter);
+app.use(deviceControlRouter);
 
 // Export main router to use it in the main app.
 module.exports = app;

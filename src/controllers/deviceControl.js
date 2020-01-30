@@ -1,18 +1,20 @@
 const axios = require('axios');
 const {defaultGetController} = require('./default');
 
-const apiName = 'Dashboard';
-const DASHBOARD_URL = process.env.DASHBOARD_URL;
-if (DASHBOARD_URL === undefined) {
-  console.log('[API-GATEWAY][ERROR] No Dashboard URL specified in the env variables');
+const apiName = 'Device Control';
+const DEVICE_CONTROL_URL = process.env.DEVICE_CONTROL_URL;
+
+if (DEVICE_CONTROL_URL === undefined) {
+  console.log('[Gateway API][Error] No Device Control URL specified in the env variables');
+  process.exit(1);
 }
 
 exports.getRegistry = async (req, res) => {
-  console.log(`[API-GATEWAY][GET][DASHBOARD][ /registry ]`);
+  console.log(`[Gateway API][GET][Device Control][ /registry ]`);
   const query = '/registry';
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
@@ -27,7 +29,7 @@ exports.getDevices = async (req, res) => {
   const query = '/devices';
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
@@ -40,10 +42,10 @@ exports.getDevices = async (req, res) => {
 
 exports.getDeviceState = async (req, res) => {
   const {id} = req.params;
-  const query = `/devices/${id}/state-history`;
+  const query = `/device/${id}/state-history`;
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
@@ -56,10 +58,10 @@ exports.getDeviceState = async (req, res) => {
 
 exports.getDeviceConfig = async () => {
   const {id} = req.params;
-  const query = `/devices/${id}/config-history`;
+  const query = `/device/${id}/config-history`;
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
@@ -72,22 +74,24 @@ exports.getDeviceConfig = async () => {
 
 exports.upadateDeviceConfig = async (req, res) => {
   const {id} = req.params;
-  console.log(`[API-GATEWAY][PUT][DASHBOARD][ /devices/${id}/config ]`);
+  console.log(`[Gateway API][PUT][Device Control][ /devices/${id}/config ]`);
   const {device} = req.body;
   const {config} = device;
 
   if (config === undefined) {
-    console.log(`[API-GATEWAY][PUT][DASHBOARD][ /devices/${id}/config ][ERROR]: Config Undefined`);
+    console.log(
+      `[Gateway API][PUT][Device Control][ /device/${id}/config ][Error]: Config Undefined`,
+    );
     return res.status(500).send({error: 'Config undefined'});
   }
 
   try {
-    const {data} = await axios.put(`${DASHBOARD_URL}/devices/${id}/config`, config);
+    const {data} = await axios.put(`${DEVICE_CONTROL_URL}/device/${id}/config`, config);
     res.status(200).json({
       data,
     });
   } catch (error) {
-    console.log(`[API-GATEWAY][PUT][DASHBOARD][ /devices/${id}/config ][ERROR]`, error);
+    console.log(`[Gateway API][PUT][Device Control][ /device/${id}/config ][Error]`, error);
     res.status(500).json({
       error,
     });
@@ -96,10 +100,10 @@ exports.upadateDeviceConfig = async (req, res) => {
 
 exports.getUserByDevice = async (req, res) => {
   const {id} = req.params;
-  const query = `/devices/${id}/user`;
+  const query = `/device/${id}/user`;
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
@@ -112,10 +116,10 @@ exports.getUserByDevice = async (req, res) => {
 
 exports.getDeviceLastState = async (req, res) => {
   const {id} = req.params;
-  const query = `/devices/${id}/state`;
+  const query = `/device/${id}/state`;
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
@@ -128,10 +132,10 @@ exports.getDeviceLastState = async (req, res) => {
 
 exports.getDeviceLastConfig = async (req, res) => {
   const {id} = req.params;
-  const query = `/devices/${id}/config`;
+  const query = `/device/${id}/config`;
 
   try {
-    const data = await defaultGetController(apiName, DASHBOARD_URL, query);
+    const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
     res.status(200).json({
       data,
     });
