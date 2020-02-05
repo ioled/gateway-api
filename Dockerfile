@@ -1,8 +1,11 @@
 # Install latest node dependency
 FROM node:alpine
 
+# Use Makefule in container
+RUN apk add --update make
+
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package file with dependencies
 COPY package*.json ./
@@ -18,4 +21,4 @@ COPY . .
 EXPOSE 5000
 
 # Run server
-CMD ["npm", "start"]
+CMD ["make", "r"]

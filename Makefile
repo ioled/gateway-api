@@ -10,7 +10,7 @@ DEVICE_CONTROL_URL := $$(cat $(ENV) | grep DEVICE_CONTROL_URL | sed 's/"/ /g' | 
 JWT_KEY := $$(cat $(ENV) | grep JWT_KEY | sed 's/"/ /g' | awk {'print $$3'})
 GOOGLE_CLIENT_SECRET := $$(cat $(ENV) | grep GOOGLE_CLIENT_SECRET | sed 's/"/ /g' | awk {'print $$3'})
 
-SVC=gateway-api
+SVC=ioled-gateway-api
 PORT=3000
 
 version v:
@@ -19,6 +19,15 @@ version v:
 init i:
 	@echo "[Dependencies] Installing dependencies"
 	@npm install
+
+docker:
+	@echo [Docker] Building docker image
+	@docker build -t $(SVC):$(VERSION) .
+
+docker-compose co:
+	@echo [Docker][Compose] Running with docker compose
+	@docker-compose build
+	@docker-compose up
 
 deploy d:
 	@echo "[App Engine Deployment] Deploying App"
