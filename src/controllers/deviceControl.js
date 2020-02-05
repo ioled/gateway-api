@@ -51,7 +51,7 @@ exports.getDeviceState = async (req, res) => {
   }
 };
 
-exports.getDeviceConfig = async () => {
+exports.getDeviceConfig = async (req, res) => {
   const {id} = req.params;
   const query = `/device/${id}/config-history`;
 
@@ -81,7 +81,7 @@ exports.upadateDeviceConfig = async (req, res) => {
   }
 
   try {
-    const {data} = await axios.put(`${DEVICE_CONTROL_URL}/device/${id}/config`, config);
+    const {data} = await axios.put(`${DEVICE_CONTROL_URL}/device/${id}`, req.body);
     res.status(200).json({
       data,
     });
