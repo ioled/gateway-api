@@ -2,9 +2,10 @@
 
 ### Auth
 
-| N°  | Query                         | Method  | Response  |
-| :-: | ----------------------------- | ------- | --------- |
-|  1  | /auth/user/:id/device/:device | **GET** | JWT token |
+| N°  | Query                 | Method  | Response                       |
+| :-: | --------------------- | ------- | ------------------------------ |
+|  1  | /auth/google          | **GET** | Google Authentication          |
+|  2  | /auth/google/callback | **GET** | Google Authentication Callback |
 
 ### History
 
