@@ -1,5 +1,5 @@
 # Install latest node dependency
-FROM node:alpine
+FROM node:lts-alpine3.10
 
 # Use Makefule in container
 RUN apk add --update make
@@ -8,7 +8,7 @@ RUN apk add --update make
 WORKDIR /app
 
 # Copy package file with dependencies
-COPY package*.json ./
+COPY package.json ./
 
 # Install dependencies
 
@@ -18,7 +18,7 @@ RUN npm install
 COPY . .
 
 # Expose port to listen server
-EXPOSE 5000
+EXPOSE 3000
 
 # Run server
 CMD ["make", "r"]

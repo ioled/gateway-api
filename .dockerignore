@@ -1,10 +1,6 @@
 node_modules
-app.yaml
-env.json
-env-dev.json
 npm-debug.log
 .gitignore
 .gcloudignore
 .prettierrc
 README.md
-

@@ -9,7 +9,7 @@ const authService = require('../middlewares/authService');
  * @param  {Function} next Callback function
  */
 exports.authRequest = (req, res, next) => {
-  console.log('[Gateway-API][authRequest][Request]', req.params, req.body);
+  console.log('[Gateway-API][authRequest][Request]');
   passport.authenticate('google', {
     session: false,
     scope: ['profile', 'email'],
@@ -19,7 +19,7 @@ exports.authRequest = (req, res, next) => {
 
 // Redirect to the server with the session established.
 exports.authCallback = (req, res, next) => {
-  console.log('[Gateway-API][authCallback][Request]', req.params, req.body);
+  console.log('[Gateway-API][authCallback][Request]');
   passport.authenticate('google', {session: false})(req, res, next);
   console.log('[Gateway-API][authCallback][Response]', []);
 };
