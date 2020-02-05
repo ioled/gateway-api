@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const {getDayGraph, getWeekGraph, getMonthGraph} = require('../controllers/history');
+const {getDayData, getWeekData, getMonthData} = require('../controllers/history');
 
-const {protectedRoute} = require('../middlewares/checkJWT');
+const {protectedRoute} = require('../middlewares/authService');
 
-router.use(protectedRoute);
-
-router.route('/history/day/:device').get(getDayGraph);
-router.route('/history/week/:device').get(getWeekGraph);
-router.route('/history/month/:device').get(getMonthGraph);
+router.route('/history/day/:device').get(protectedRoute, getDayData);
+router.route('/history/week/:device').get(protectedRoute, getWeekData);
+router.route('/history/month/:device').get(protectedRoute, getMonthData);
 
 module.exports = router;

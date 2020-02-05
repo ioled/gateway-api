@@ -1,6 +1,12 @@
 const jwt = require('jsonwebtoken');
 const {JWT_KEY} = require('../config/env');
 
+// Issue Token
+exports.signToken = (req, res) => {
+  const token = jwt.sign({user: req.user.googleID}, JWT_KEY);
+  res.json({token});
+};
+
 exports.protectedRoute = (req, res, next) => {
   let token = req.headers['authorization'];
 

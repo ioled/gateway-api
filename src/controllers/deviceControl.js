@@ -1,13 +1,8 @@
 const axios = require('axios');
 const {defaultGetController} = require('./default');
+const {DEVICE_CONTROL_URL} = require('../config/env');
 
 const apiName = 'Device Control';
-const DEVICE_CONTROL_URL = process.env.DEVICE_CONTROL_URL;
-
-if (DEVICE_CONTROL_URL === undefined) {
-  console.log('[Gateway API][Error] No Device Control URL specified in the env variables');
-  process.exit(1);
-}
 
 exports.getRegistry = async (req, res) => {
   console.log(`[Gateway API][GET][Device Control][ /registry ]`);

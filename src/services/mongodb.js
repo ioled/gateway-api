@@ -1,15 +1,10 @@
 const mongoose = require('mongoose');
-const MONGO_URI = process.env.MONGO_URI;
-
-if (MONGO_URI === undefined) {
-  console.log('[Gateway API][Error] No Mongo URI specified in the env variables');
-  process.exit(1);
-}
+const {MONGO_URI} = require('../config/env');
 
 // Mongoose connection
 mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
   if (err) throw err;
-  console.log('[Service][Mongoose] Connection to MongoDB is ready');
+  console.log('[Gateway API][Service][Mongoose] Connection to MongoDB is ready');
 });
 
 // Device Schema

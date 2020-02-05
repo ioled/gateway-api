@@ -1,13 +1,11 @@
 const {defaultGetController} = require('./default');
+const {HISTORY_URL} = require('../config/env');
 
 const apiName = 'History';
-const HISTORY_URL = process.env.HISTORY_URL;
-if (HISTORY_URL === undefined) {
-  console.log('[Gateway API][Error] No History URL specified in the env variables');
-}
 
-exports.getDayGraph = async (req, res) => {
+exports.getDayData = async (req, res) => {
   const {device} = req.params;
+
   const query = `/day/${device}`;
 
   try {
@@ -22,7 +20,7 @@ exports.getDayGraph = async (req, res) => {
   }
 };
 
-exports.getWeekGraph = async (req, res) => {
+exports.getWeekData = async (req, res) => {
   const {device} = req.params;
   const query = `/week/${device}`;
 
@@ -38,7 +36,7 @@ exports.getWeekGraph = async (req, res) => {
   }
 };
 
-exports.getMonthGraph = async (req, res) => {
+exports.getMonthData = async (req, res) => {
   const {device} = req.params;
   const query = `/week/${device}`;
 

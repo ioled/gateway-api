@@ -12,10 +12,6 @@ const {
   getDeviceLastConfig,
 } = require('../controllers/deviceControl');
 
-const {protectedRoute} = require('../middlewares/checkJWT');
-
-router.use(protectedRoute);
-
 router.route('/deviceControl/registry').get(getRegistry);
 router.route('/deviceControl/devices').get(getDevices);
 router.route('/deviceControl/device/:id/state-history').get(getDeviceState);
