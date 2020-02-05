@@ -3,13 +3,11 @@ const router = express.Router();
 
 // Import all controllers for authentication.
 const {authRequest, authCallback, authRedirect} = require('../controllers/auth');
-const {verifyToken} = require('../middlewares/authService');
+const {signToken} = require('../middlewares/authService');
 
 // Router middleware to handle auth routes.
 router.route('/auth/google').get(authRequest);
-router.route('/auth/google/callback').get(authCallback, authRedirect);
-
-router.route('/verify').get(verifyToken);
+router.route('/auth/google/callback').get(authCallback, signToken);
 
 // Export router to use it in the main app.
 module.exports = router;

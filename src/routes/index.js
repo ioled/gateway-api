@@ -7,8 +7,8 @@ const authRouter = require('./auth.js');
 const deviceControlRouter = require('./deviceControl.js');
 
 // ----- Use all routes here -----
-app.use(historyRouter);
 app.use(authRouter);
+app.use(historyRouter);
 app.use(deviceControlRouter);
 
 // Export main router to use it in the main app.

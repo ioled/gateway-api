@@ -14,18 +14,12 @@ exports.authRequest = (req, res, next) => {
     session: false,
     scope: ['profile', 'email'],
   })(req, res, next);
+  console.log('[Gateway-API][authRequest][Response]', []);
 };
 
 // Redirect to the server with the session established.
 exports.authCallback = (req, res, next) => {
+  console.log('[Gateway-API][authCallback][Request]', req.params, req.body);
   passport.authenticate('google', {session: false})(req, res, next);
-};
-
-// Auth callback redirect.
-exports.authRedirect = (req, res) => {
-  console.log(req.user);
-
-  authService.signToken(req, res);
-
-  // res.redirect('/');
+  console.log('[Gateway-API][authCallback][Response]', []);
 };
