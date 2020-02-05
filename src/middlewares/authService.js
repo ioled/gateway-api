@@ -39,7 +39,7 @@ const getDevice = async (userId) => {
 exports.protectedRoute = (req, res, next) => {
   console.log('[Gateway-API][protectedRoute][Request]', req.params);
   let token = req.headers['authorization'];
-  const deviceId = req.params.device;
+  const deviceId = req.params.id;
 
   if (token) {
     token = token.replace('Bearer ', '');
