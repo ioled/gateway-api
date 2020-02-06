@@ -4,9 +4,9 @@ const {HISTORY_URL} = require('../config/env');
 const apiName = 'History';
 
 exports.getDayData = async (req, res) => {
-  const {device} = req.params;
+  const {id} = req.params;
 
-  const query = `/day/${device}`;
+  const query = `/day/${id}`;
 
   try {
     const data = await defaultGetController(apiName, HISTORY_URL, query);
@@ -21,8 +21,8 @@ exports.getDayData = async (req, res) => {
 };
 
 exports.getWeekData = async (req, res) => {
-  const {device} = req.params;
-  const query = `/week/${device}`;
+  const {id} = req.params;
+  const query = `/week/${id}`;
 
   try {
     const data = await defaultGetController(apiName, HISTORY_URL, query);
@@ -37,8 +37,8 @@ exports.getWeekData = async (req, res) => {
 };
 
 exports.getMonthData = async (req, res) => {
-  const {device} = req.params;
-  const query = `/week/${device}`;
+  const {id} = req.params;
+  const query = `/week/${id}`;
 
   try {
     const data = await defaultGetController(apiName, HISTORY_URL, query);
