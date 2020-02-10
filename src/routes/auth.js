@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import all controllers for authentication.
-const {authRequest, authCallback, authRedirect} = require('../controllers/auth');
+const {authRequest, authCallback} = require('../controllers/auth');
 const {signToken} = require('../middlewares/authService');
 
 // Router middleware to handle auth routes.

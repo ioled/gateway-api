@@ -22,6 +22,12 @@ if (DEVICE_CONTROL_URL === undefined) {
   process.exit(1);
 }
 
+const USER_URL = process.env.USER_URL;
+if (USER_URL === undefined) {
+  console.log('[Gateway API][Error] No User URL specified in the env variables');
+  process.exit(1);
+}
+
 const googleClientID = '384917616977-ki9fleqmcg3crte84alco425emkqpm05.apps.googleusercontent.com';
 if (googleClientID === undefined) {
   console.log('[Gateway API][Error] No google Client ID specified in the env variables');
@@ -39,6 +45,7 @@ module.exports = {
   JWT_KEY,
   HISTORY_URL,
   DEVICE_CONTROL_URL,
+  USER_URL,
   googleClientID,
   googleClientSecret,
 };
