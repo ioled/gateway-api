@@ -1,0 +1,10 @@
+runtime: nodejs10
+service: api-gateway
+env_variables:
+  MONGO_URI: "..."
+  HISTORY_URL: "..."
+  DEVICE_CONTROL_URL: "..."
+  USER_URL: "..."
+  JWT_KEY: "..."
+  GOOGLE_CLIENT_SECRET: "..."
+  GOOGLE_CLIENT_ID: "..."
