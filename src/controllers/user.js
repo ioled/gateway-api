@@ -15,7 +15,9 @@ exports.currentUser = async (req, res) => {
       } else {
         const {user} = decoded;
         try {
-          const {data} = await axios.get(`${USER_URL}/currentUser`, {user});
+          console.log(user);
+          const {data} = await axios.post(`${USER_URL}/user`, {user});
+          console.log(data);
           res.status(200).json({data});
         } catch (error) {
           console.log('[Gateway-API][GET][Current User][ /currentUser ][Error]', error);
