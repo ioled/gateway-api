@@ -45,7 +45,7 @@ exports.protectedRoute = (req, res, next) => {
     token = token.replace('Bearer ', '');
     jwt.verify(token, JWT_KEY, (err, decoded) => {
       if (err) {
-        console.log('[Gateway-API][protectedRoute][Error]', {error: error.message});
+        console.log('[Gateway-API][protectedRoute][Error]', {err});
         return res.status(500).json({error: 'Invalid Token'});
       } else {
         req.decoded = decoded;
