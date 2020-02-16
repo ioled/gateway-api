@@ -12,7 +12,7 @@ USER_URL := $$(cat $(ENV) | grep USER_URL | sed 's/"/ /g' | awk {'print $$3'})
 GOOGLE_CLIENT_SECRET := $$(cat $(ENV) | grep GOOGLE_CLIENT_SECRET | sed 's/"/ /g' | awk {'print $$3'})
 
 SVC=ioled-gateway-api
-PORT=3000
+PORT=5000
 
 version v:
 	@echo $(VERSION)

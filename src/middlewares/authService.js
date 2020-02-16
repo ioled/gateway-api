@@ -18,16 +18,6 @@ exports.signToken = (req, res) => {
   console.log('[Gateway-API][signToken][Response]', {token: token});
 };
 
-const getUser = async (googleID) => {
-  const user = await users.findOne({googleID});
-  return user;
-};
-
-const getDevice = async (userId) => {
-  const device = await devices.findOne({_user: new ObjectId(userId)});
-  return device;
-};
-
 /**
  * @CristianValdivia & @DiegoSepulveda
  * Protect a route with JWT token
