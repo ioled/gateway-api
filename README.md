@@ -4,7 +4,15 @@
 
 | N°  | Query                         | Method  | Response  |
 | :-: | ----------------------------- | ------- | --------- |
-|  1  | /auth/user/:id/device/:device | **GET** | JWT token |
+|  1  | /auth/google                  | **GET** | JWT token |
+
+### User
+
+| N°  | Query                         | Method  | Response                                             |
+| :-: | ----------------------------- | ------- | ---------------------------------------------------- |
+|  1  | /user/currentUser             | **GET** | Returns the current authenticated user               |
+|  2  | /user/devices                 | **GET** | List all the registered devices for the current user |
+
 
 ### History
 
