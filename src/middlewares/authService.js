@@ -91,9 +91,6 @@ exports.protectedRoute = (req, res, next) => {
           }
 
           if (userDeviceId === deviceId || isAdminFlag) {
-            console.log('[DEBUGGING] userDeviceId:', userDeviceId);
-            console.log('[DEBUGGING] deviceId:', deviceId);
-            console.log('[DEBUGGING] isAdmin(userId):', isAdminFlag);
             console.log('[Gateway-API][protectedRoute][Response]', req.decoded);
             next();
           } else {
@@ -111,5 +108,54 @@ exports.protectedRoute = (req, res, next) => {
   } else {
     console.log('[Gateway-API][protectedRoute][Error]', {error: 'No token provided'});
     return res.status(500).json({error: 'No token provided'});
+  }
+};
+
+/**
+ * @CristianValdivia & @DiegoSepulveda
+ * Route only available for admins
+ * @description Define if the user accesing this route is an admin
+ * @param  {object} req Request
+ * @param  {object} res Response
+ * @param  {Function} next Callback function
+ */
+exports.adminRoute = (req, res, next) => {
+  console.log('[Gateway-API][adminRoute][Request]', req.params);
+  let token = req.headers['authorization'];
+
+  if (token) {
+    token = token.replace('Bearer ', '');
+    jwt.verify(token, JWT_KEY, async (err, decoded) => {
+      if (err) {
+        console.log('[Gateway-API][adminRoute][Error]', {err});
+        return res.status(500).json({error: 'Invalid Token'});
+      } else {
+        req.decoded = decoded;
+        const googleID = decoded.user;
+
+        try {
+          const user = await getUser(googleID);
+          if (user === undefined) {
+            console.log('[Gateway-API][adminRoute][Error]', {error: 'User not found'});
+            return res.status(500).json({error: 'User not found'});
+          }
+          const userId = user._id;
+          const isAdminFlag = await isAdmin(userId);
+
+          if (isAdminFlag) {
+            console.log('[Gateway-API][adminRoute][Response]', req.decoded);
+            next();
+          } else {
+            console.log('[Gateway-API][adminRoute][Error]', {
+              error: 'User is not an admin',
+            });
+            return res.status(500).json({error: 'User is not an admin'});
+          }
+        } catch {
+          console.log('[Gateway-API][adminRoute][Error]', {error});
+          return res.status(500).json({error});
+        }
+      }
+    });
   }
 };

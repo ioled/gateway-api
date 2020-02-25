@@ -12,10 +12,10 @@ const {
   getDeviceLastConfig,
 } = require('../controllers/deviceControl');
 
-const {protectedRoute} = require('../middlewares/authService');
+const {protectedRoute, adminRoute} = require('../middlewares/authService');
 
-router.route('/deviceControl/registry').get(getRegistry);
-router.route('/deviceControl/devices').get(getDevices);
+router.route('/deviceControl/registry').get(adminRoute, getRegistry);
+router.route('/deviceControl/devices').get(adminRoute, getDevices);
 router.route('/deviceControl/device/:id/state-history').get(protectedRoute, getDeviceState);
 router.route('/deviceControl/device/:id/config-history').get(protectedRoute, getDeviceConfig);
 router.route('/deviceControl/device/:id/config').put(protectedRoute, upadateDeviceConfig);
