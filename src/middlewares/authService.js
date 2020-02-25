@@ -66,19 +66,20 @@ exports.protectedRoute = (req, res, next) => {
             console.log('[Gateway-API][protectedRoute][Error]', {error: 'User not found'});
             return res.status(500).json({error: 'User not found'});
           }
+
           const userId = user._id;
+          const isAdminFlag = await isAdmin(userId);
 
           let userDeviceId = '';
           let device = {};
 
-          if (!isAdmin(userId)) {
-            console.log(userId);
+          if (!isAdminFlag) {
             device = await getDevice(userId);
           } else {
             device = null;
           }
 
-          if (device === null && !isAdmin(userId)) {
+          if (device === null && !isAdminFlag) {
             console.log('[Gateway-API][protectedRoute][Error]', {
               error: 'Device not found',
             });
@@ -89,7 +90,10 @@ exports.protectedRoute = (req, res, next) => {
             userDeviceId = device.deviceId;
           }
 
-          if (userDeviceId === deviceId || isAdmin(userId)) {
+          if (userDeviceId === deviceId || isAdminFlag) {
+            console.log('[DEBUGGING] userDeviceId:', userDeviceId);
+            console.log('[DEBUGGING] deviceId:', deviceId);
+            console.log('[DEBUGGING] isAdmin(userId):', isAdminFlag);
             console.log('[Gateway-API][protectedRoute][Response]', req.decoded);
             next();
           } else {
