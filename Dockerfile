@@ -8,7 +8,7 @@ RUN apk add --update make
 WORKDIR /app
 
 # Copy package file with dependencies
-COPY package.json ./
+COPY package*.json ./
 
 # Install dependencies
 

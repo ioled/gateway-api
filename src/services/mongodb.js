@@ -29,11 +29,23 @@ const userSchema = mongoose.Schema({
   lastName: String,
   email: String,
   photo: String,
+  role: String,
 });
 
 const users = mongoose.model('users', userSchema);
 
+const isAdmin = async (userId) => {
+  try {
+    const user = await users.findById(userId);
+    if (user.role === 'admin') return true;
+    else return false;
+  } catch (error) {
+    console.log('[Gateway-API][isAdmin]', error);
+  }
+};
+
 module.exports = {
   users,
   devices,
+  isAdmin,
 };
