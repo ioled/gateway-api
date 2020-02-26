@@ -1,5 +1,12 @@
 ## Routes in the Gateway
 
+### User
+
+| N°  | Query             | Method  | Response                                             | Only available to admin |
+| :-: | ----------------- | ------- | ---------------------------------------------------- | ----------------------- |
+|  1  | /user/currentUser | **GET** | Returns the current authenticated user               | No                      |
+|  2  | /user/devices     | **GET** | List all the registered devices for the current user | No                      |
+
 ### Auth
 
 | N°  | Query                 | Method  | Response                       |
