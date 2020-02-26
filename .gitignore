@@ -1,4 +1,5 @@
 node_modules
 app.yaml
+app-testing.yaml
 env.json
 env-dev.json
