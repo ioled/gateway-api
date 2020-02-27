@@ -1,18 +1,20 @@
 ## Routes in the Gateway
 
-### User
-
-| N°  | Query             | Method  | Response                                             | Only available to admin |
-| :-: | ----------------- | ------- | ---------------------------------------------------- | ----------------------- |
-|  1  | /user/currentUser | **GET** | Returns the current authenticated user               | No                      |
-|  2  | /user/devices     | **GET** | List all the registered devices for the current user | No                      |
-
 ### Auth
 
 | N°  | Query                 | Method  | Response                       |
 | :-: | --------------------- | ------- | ------------------------------ |
 |  1  | /auth/google          | **GET** | Google Authentication          |
 |  2  | /auth/google/callback | **GET** | Google Authentication Callback |
+
+### User
+
+| N°  | Query                            | Method   | Response                                             | Only available to admin |
+| :-: | -------------------------------- | -------- | ---------------------------------------------------- | ----------------------- |
+|  1  | /user/currentUser                | **GET**  | Returns the current authenticated user               | No                      |
+|  2  | /user/devices                    | **GET**  | List all the registered devices for the current user | No                      |
+|  2  | /user/saveDevice                 | **POST** | Save device to the database                          | Yes                     |
+|  2  | /user/linkUser/:userId/:deviceID | **PUT**  | Set device user                                      | Yes                     |
 
 ### History
 

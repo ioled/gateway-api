@@ -56,3 +56,49 @@ exports.getDevices = async (req, res) => {
     return res.send(false);
   }
 };
+
+exports.saveDevice = async (req, res) => {
+  console.log(`[Gateway API][POST][USER API][ /saveDevice ][Request]`, req.params, req.body);
+
+  try {
+    const {duty, state, timerOn, timerOff, timerState, deviceID} = req.body;
+
+    const device = {
+      duty,
+      state,
+      timerOn,
+      timerOff,
+      timerState,
+      deviceID,
+    };
+
+    const resp = await axios.post(`${USER_URL}/saveDevice`, device);
+    const {newDevice} = resp.data;
+
+    console.log(`[Gateway API][POST][USER API][ /saveDevice ][Response]`, {newDevice});
+    res.status(200).json({newDevice});
+  } catch (error) {
+    console.log(`[Gateway API][POST][USER API][ /saveDevice ][Error]`, error);
+    res.status(500).json({
+      error,
+    });
+  }
+};
+
+exports.likUser = async (req, res) => {
+  console.log(`[Gateway API][PUT][USER API][ /linkUser ][Request]`, req.params, res.body);
+
+  try {
+    const {userId, deviceId} = req.params;
+    const resp = await axios.put(`${USER_URL}/linkUser/${userId}/${deviceId}`);
+    const {updatedDevice} = resp.data;
+
+    console.log(`[Gateway API][PUT][USER API][ /linkUser ][Response]`, {updatedDevice});
+    res.status(200).json({updatedDevice});
+  } catch (error) {
+    console.log(`[Gateway API][POPUTST][USER API][ /linkUser ][Error]`, error);
+    res.status(500).json({
+      error,
+    });
+  }
+};

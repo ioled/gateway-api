@@ -38,6 +38,10 @@ deploy-test dt:
 	@echo "[TESTING] [App Engine Deployment] Deploying App"
 	@gcloud app deploy app-testing.yaml
 
+deploy-features df:
+	@echo "[NEW FEATURES] [App Engine Deployment] Deploying App"
+	@gcloud app deploy app-features.yaml
+
 run r:
 	@echo "[Running] Running service with $(ENV)"
 	@PORT=$(PORT) MONGO_URI="$(MONGO_URI)" JWT_KEY="$(JWT_KEY)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" HISTORY_URL="$(HISTORY_URL)" DEVICE_CONTROL_URL="$(DEVICE_CONTROL_URL)" USER_URL="$(USER_URL)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" node src/index.js
