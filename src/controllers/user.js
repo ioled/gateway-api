@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
+const {defaultGetController} = require('./default');
 const {JWT_KEY} = require('../config/env');
 const {USER_URL} = require('../config/env');
+
+const apiName = 'User';
 
 exports.currentUser = async (req, res) => {
   console.log('[Gateway-API][GET][USER API][ /currentUser ][Request]', req.params, req.body);
@@ -61,7 +64,7 @@ exports.saveDevice = async (req, res) => {
   console.log(`[Gateway API][POST][USER API][ /saveDevice ][Request]`, req.params, req.body);
 
   try {
-    const {duty, state, timerOn, timerOff, timerState, deviceID} = req.body;
+    const {duty, state, timerOn, timerOff, userID, deviceID} = req.body;
 
     const device = {
       duty,
@@ -69,6 +72,7 @@ exports.saveDevice = async (req, res) => {
       timerOn,
       timerOff,
       timerState,
+      userID,
       deviceID,
     };
 
@@ -85,7 +89,7 @@ exports.saveDevice = async (req, res) => {
   }
 };
 
-exports.likUser = async (req, res) => {
+exports.linkUser = async (req, res) => {
   console.log(`[Gateway API][PUT][USER API][ /linkUser ][Request]`, req.params, res.body);
 
   try {
@@ -97,6 +101,33 @@ exports.likUser = async (req, res) => {
     res.status(200).json({updatedDevice});
   } catch (error) {
     console.log(`[Gateway API][POPUTST][USER API][ /linkUser ][Error]`, error);
+    res.status(500).json({
+      error,
+    });
+  }
+};
+
+exports.getAllDevices = async (req, res) => {
+  const query = '/allDevices';
+
+  try {
+    const {data} = await defaultGetController(apiName, USER_URL, query);
+    res.status(200).json({devices: data});
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
+};
+
+exports.getUserByDevice = async (req, res) => {
+  const {id} = req.params;
+  const query = `/device/${id}/user`;
+
+  try {
+    const {data} = await defaultGetController(apiName, USER_URL, query);
+    res.status(200).json({user: data});
+  } catch (error) {
     res.status(500).json({
       error,
     });

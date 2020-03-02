@@ -13,8 +13,10 @@
 | :-: | -------------------------------- | -------- | ---------------------------------------------------- | ----------------------- |
 |  1  | /user/currentUser                | **GET**  | Returns the current authenticated user               | No                      |
 |  2  | /user/devices                    | **GET**  | List all the registered devices for the current user | No                      |
-|  3  | /user/saveDevice                 | **POST** | Save device to the database                          | Yes \*                  |
-|  4  | /user/linkUser/:userId/:deviceID | **PUT**  | Set device user                                      | Yes \*                  |
+|  3  | /user/saveDevice                 | **POST** | Save device to the database                          | No                      |
+|  4  | /user/linkUser/:userId/:deviceID | **PUT**  | Set device user                                      | Yes                     |
+|  5  | /user/allDevices                 | **GET**  | All devices in the registry                          | Yes                     |
+|  6  | /user/device/:id/user            | **GET**  | Owner of the device's user information               | Yes                     |
 
 ### History
 
@@ -26,13 +28,11 @@
 
 ### Device Control
 
-| N°  | Query                                    | Method  | Response                               | Only available to admin |
-| :-: | ---------------------------------------- | ------- | -------------------------------------- | ----------------------- |
-|  1  | /deviceControl/registry                  | **GET** | All registries in the project          | Yes                     |
-|  2  | /deviceControl/devices                   | **GET** | All devices in the registry            | Yes                     |
-|  3  | /deviceControl/device/:id/state-history  | **GET** | Last 10 states stored                  | No                      |
-|  4  | /deviceControl/device/:id/config-history | **GET** | Last 10 configs stored                 | No                      |
-|  5  | /deviceControl/device/:id/config         | **PUT** | Update the config of device            | No                      |
-|  6  | /deviceControl/device/:id/user           | **GET** | Owner of the device's user information | No                      |
-|  7  | /deviceControl/device/:id/state          | **GET** | Last state stored                      | No                      |
-|  8  | /deviceControl/device/:id/config         | **GET** | Last config stored                     | No                      |
+| N°  | Query                                    | Method  | Response                      | Only available to admin |
+| :-: | ---------------------------------------- | ------- | ----------------------------- | ----------------------- |
+|  1  | /deviceControl/registry                  | **GET** | All registries in the project | Yes                     |
+|  2  | /deviceControl/device/:id/state-history  | **GET** | Last 10 states stored         | No                      |
+|  3  | /deviceControl/device/:id/config-history | **GET** | Last 10 configs stored        | No                      |
+|  4  | /deviceControl/device/:id/config         | **PUT** | Update the config of device   | No                      |
+|  5  | /deviceControl/device/:id/state          | **GET** | Last state stored             | No                      |
+|  6  | /deviceControl/device/:id/config         | **GET** | Last config stored            | No                      |

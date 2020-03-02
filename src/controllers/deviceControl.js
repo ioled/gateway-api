@@ -18,19 +18,6 @@ exports.getRegistry = async (req, res) => {
   }
 };
 
-exports.getDevices = async (req, res) => {
-  const query = '/devices';
-
-  try {
-    const {data} = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
-    res.status(200).json({devices: data});
-  } catch (error) {
-    res.status(500).json({
-      error,
-    });
-  }
-};
-
 exports.getDeviceState = async (req, res) => {
   const {id} = req.params;
   const query = `/device/${id}/state-history`;
@@ -77,20 +64,6 @@ exports.upadateDeviceConfig = async (req, res) => {
     res.status(200).json({deviceUpdated: data});
   } catch (error) {
     console.log(`[Gateway API][PUT][Device Control][ /device/${id}/config ][Error]`, error);
-    res.status(500).json({
-      error,
-    });
-  }
-};
-
-exports.getUserByDevice = async (req, res) => {
-  const {id} = req.params;
-  const query = `/device/${id}/user`;
-
-  try {
-    const {data} = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
-    res.status(200).json({user: data});
-  } catch (error) {
     res.status(500).json({
       error,
     });
