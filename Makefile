@@ -10,6 +10,7 @@ HISTORY_URL := $$(cat $(ENV) | grep HISTORY_URL | sed 's/"/ /g' | awk {'print $$
 DEVICE_CONTROL_URL := $$(cat $(ENV) | grep DEVICE_CONTROL_URL | sed 's/"/ /g' | awk {'print $$3'})
 USER_URL := $$(cat $(ENV) | grep USER_URL | sed 's/"/ /g' | awk {'print $$3'})
 GOOGLE_CLIENT_SECRET := $$(cat $(ENV) | grep GOOGLE_CLIENT_SECRET | sed 's/"/ /g' | awk {'print $$3'})
+projectId := $$(cat $(ENV) | grep projectId | sed 's/"/ /g' | awk {'print $$3'})
 
 SVC=ioled-gateway-api
 PORT=3000
@@ -44,6 +45,6 @@ deploy-features df:
 
 run r:
 	@echo "[Running] Running service with $(ENV)"
-	@PORT=$(PORT) MONGO_URI="$(MONGO_URI)" JWT_KEY="$(JWT_KEY)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" HISTORY_URL="$(HISTORY_URL)" DEVICE_CONTROL_URL="$(DEVICE_CONTROL_URL)" USER_URL="$(USER_URL)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" node src/index.js
+	@PORT=$(PORT) GOOGLE_APPLICATION_CREDENTIALS="./google-cloud-service-account.json" MONGO_URI="$(MONGO_URI)" JWT_KEY="$(JWT_KEY)" projectId="$(projectId)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" HISTORY_URL="$(HISTORY_URL)" DEVICE_CONTROL_URL="$(DEVICE_CONTROL_URL)" USER_URL="$(USER_URL)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" node src/index.js
 
 .PHONY: version v init i deploy d run r

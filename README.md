@@ -13,8 +13,8 @@
 | :-: | -------------------------------- | -------- | ---------------------------------------------------- | ----------------------- |
 |  1  | /user/currentUser                | **GET**  | Returns the current authenticated user               | No                      |
 |  2  | /user/devices                    | **GET**  | List all the registered devices for the current user | No                      |
-|  2  | /user/saveDevice                 | **POST** | Save device to the database                          | Yes                     |
-|  2  | /user/linkUser/:userId/:deviceID | **PUT**  | Set device user                                      | Yes                     |
+|  3  | /user/saveDevice                 | **POST** | Save device to the database                          | Yes \*                  |
+|  4  | /user/linkUser/:userId/:deviceID | **PUT**  | Set device user                                      | Yes \*                  |
 
 ### History
 

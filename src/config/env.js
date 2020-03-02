@@ -40,6 +40,12 @@ if (googleClientSecret === undefined) {
   process.exit(1);
 }
 
+const projectId = process.env.projectId;
+if (projectId === undefined) {
+  console.log('[Gateway API][Error] No Project ID specified in the env variables');
+  process.exit(1);
+}
+
 module.exports = {
   MONGO_URI,
   JWT_KEY,
@@ -48,4 +54,5 @@ module.exports = {
   USER_URL,
   googleClientID,
   googleClientSecret,
+  projectId,
 };

@@ -1,27 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {JWT_KEY} = require('../config/env');
-const {users, devices, isAdmin} = require('../services/mongodb');
-const {ObjectId} = require('mongoose').Types;
-
-const getUser = async (googleID) => {
-  try {
-    const user = await users.findOne({googleID});
-    return user;
-  } catch (error) {
-    console.log('[Gateway-API][getUser]', error);
-    return null;
-  }
-};
-
-const getDevice = async (userId) => {
-  try {
-    const device = await devices.findOne({_user: new ObjectId(userId)});
-    return device;
-  } catch (error) {
-    console.log('[Gateway-API][getUser]', error);
-    return null;
-  }
-};
+const {getDevice, getUser, isAdmin} = require('../services/firestore');
 
 /**
  * @CristianValdivia
@@ -32,7 +11,7 @@ const getDevice = async (userId) => {
  * @param  {Function} next Callback function
  */
 exports.signToken = (req, res) => {
-  console.log('[Gateway-API][signToken][Request]', req.user, req.body);
+  console.log('[Gateway-API][signToken][Request]', req.user);
   const token = jwt.sign({user: req.user.googleID}, JWT_KEY);
   res.json({token});
   console.log('[Gateway-API][signToken][Response]', {token: token});
@@ -61,14 +40,13 @@ exports.protectedRoute = (req, res, next) => {
         req.decoded = decoded;
         const googleID = decoded.user;
         try {
-          const user = await getUser(googleID);
-          if (user === undefined) {
+          const {userId, user} = await getUser(googleID);
+          if (user === null) {
             console.log('[Gateway-API][protectedRoute][Error]', {error: 'User not found'});
             return res.status(500).json({error: 'User not found'});
           }
 
-          const userId = user._id;
-          const isAdminFlag = await isAdmin(userId);
+          const isAdminFlag = isAdmin(user);
 
           let userDeviceId = '';
           let device = {};
@@ -132,15 +110,14 @@ exports.adminRoute = (req, res, next) => {
       } else {
         req.decoded = decoded;
         const googleID = decoded.user;
-
         try {
-          const user = await getUser(googleID);
-          if (user === undefined) {
+          const {userId, user} = await getUser(googleID);
+          if (user === null) {
             console.log('[Gateway-API][adminRoute][Error]', {error: 'User not found'});
             return res.status(500).json({error: 'User not found'});
           }
-          const userId = user._id;
-          const isAdminFlag = await isAdmin(userId);
+
+          const isAdminFlag = isAdmin(user);
 
           if (isAdminFlag) {
             console.log('[Gateway-API][adminRoute][Response]', req.decoded);

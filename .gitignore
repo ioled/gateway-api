@@ -4,3 +4,4 @@ app-testing.yaml
 app-features.yaml
 env.json
 env-dev.json
+google-cloud-service-account.json
