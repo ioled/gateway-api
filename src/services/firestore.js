@@ -42,7 +42,6 @@ exports.getDevice = async (userID) => {
 };
 
 exports.isAdmin = (user) => {
-  console.log(user);
   if (user.role === 'admin') return true;
   else return false;
 };

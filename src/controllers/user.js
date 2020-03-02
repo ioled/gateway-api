@@ -121,8 +121,10 @@ exports.getAllDevices = async (req, res) => {
 };
 
 exports.getUserByDevice = async (req, res) => {
+  console.log('FLAG!');
   const {id} = req.params;
   const query = `/device/${id}/user`;
+  console.log('QUERY:', query);
 
   try {
     const {data} = await defaultGetController(apiName, USER_URL, query);
