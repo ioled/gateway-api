@@ -1,5 +1,4 @@
 const passport = require('passport');
-const authService = require('../middlewares/authService');
 
 /**
  * Send the user to google oauth flow to log in with a google account.

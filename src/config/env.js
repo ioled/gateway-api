@@ -4,12 +4,6 @@ if (JWT_KEY === undefined) {
   process.exit(1);
 }
 
-const MONGO_URI = process.env.MONGO_URI;
-if (MONGO_URI === undefined) {
-  console.log('[Gateway API][Error] No Mongo URI specified in the env variables');
-  process.exit(1);
-}
-
 const HISTORY_URL = process.env.HISTORY_URL;
 if (HISTORY_URL === undefined) {
   console.log('[Gateway API][Error] No History URL specified in the env variables');
@@ -25,6 +19,12 @@ if (DEVICE_CONTROL_URL === undefined) {
 const USER_URL = process.env.USER_URL;
 if (USER_URL === undefined) {
   console.log('[Gateway API][Error] No User URL specified in the env variables');
+  process.exit(1);
+}
+
+const MAILER_URL = process.env.MAILER_URL;
+if (MAILER_URL === undefined) {
+  console.log('[Gateway API][Error] No Mailer URL specified in the env variables');
   process.exit(1);
 }
 
@@ -47,10 +47,10 @@ if (projectId === undefined) {
 }
 
 module.exports = {
-  MONGO_URI,
   JWT_KEY,
   HISTORY_URL,
   DEVICE_CONTROL_URL,
+  MAILER_URL,
   USER_URL,
   googleClientID,
   googleClientSecret,

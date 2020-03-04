@@ -1,8 +1,8 @@
 runtime: nodejs10
 service: api-gateway
 env_variables:
-  MONGO_URI: "..."
   HISTORY_URL: "..."
+  MAILER_URL: "..."
   DEVICE_CONTROL_URL: "..."
   USER_URL: "..."
   JWT_KEY: "..."
