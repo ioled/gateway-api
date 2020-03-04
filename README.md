@@ -36,3 +36,9 @@
 |  4  | /deviceControl/device/:id/config         | **PUT** | Update the config of device   | No                      |
 |  5  | /deviceControl/device/:id/state          | **GET** | Last state stored             | No                      |
 |  6  | /deviceControl/device/:id/config         | **GET** | Last config stored            | No                      |
+
+### Mailer
+
+| N°  | Query     | Method   | Response      |
+| :-: | --------- | -------- | ------------- |
+|  1  | /sendMail | **POST** | Mailer status |
