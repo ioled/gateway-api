@@ -41,11 +41,11 @@ exports.getDeviceState = async (req, res) => {
 
   try {
     const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
-    res.status(200).json({
+    res.status(200).send({
       data,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(500).send({
       error,
     });
   }
@@ -82,6 +82,7 @@ exports.upadateDeviceConfig = async (req, res) => {
 
   try {
     const {data} = await axios.put(`${DEVICE_CONTROL_URL}/device/${id}`, req.body);
+    console.log(`[Gateway API][PUT][Device Control][ /device/${id}/config ][Response]: `, req.body);
     res.status(200).json({
       data,
     });
@@ -115,11 +116,9 @@ exports.getDeviceLastState = async (req, res) => {
 
   try {
     const data = await defaultGetController(apiName, DEVICE_CONTROL_URL, query);
-    res.status(200).json({
-      data,
-    });
+    res.status(200).send(data);
   } catch (error) {
-    res.status(500).json({
+    res.status(500).send({
       error,
     });
   }
