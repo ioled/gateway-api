@@ -10,11 +10,11 @@ const {
   getAllDevices,
 } = require('../controllers/user');
 
-const {protectedRoute, adminRoute} = require('../middlewares/authService');
+const {protectedRoute, adminRoute, checkUser} = require('../middlewares/authService');
 
 router.route('/user/currentUser').get(currentUser);
 router.route('/user/devices').get(getDevices);
-router.route('/user/saveDevice').post(protectedRoute, saveDevice);
+router.route('/user/saveDevice').post(checkUser, saveDevice);
 router.route('/user/linkUser/:userId/:deviceId').put(adminRoute, linkUser);
 router.route('/user/allDevices').get(adminRoute, getAllDevices);
 router.route('/user/device/:id/user').get(adminRoute, getUserByDevice);

@@ -64,7 +64,7 @@ exports.saveDevice = async (req, res) => {
   console.log(`[Gateway API][POST][USER API][ /saveDevice ][Request]`, req.params, req.body);
 
   try {
-    const {duty, state, timerOn, timerOff, userID, deviceID} = req.body;
+    const {duty, state, timerOn, timerOff, timerState, userID, deviceID, week, power} = req.body;
 
     const device = {
       duty,
@@ -74,6 +74,8 @@ exports.saveDevice = async (req, res) => {
       timerState,
       userID,
       deviceID,
+      week,
+      power,
     };
 
     const resp = await axios.post(`${USER_URL}/saveDevice`, device);
