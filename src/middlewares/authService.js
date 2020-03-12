@@ -113,18 +113,15 @@ exports.adminRoute = (req, res, next) => {
   let token = req.headers['authorization'];
 
   if (token) {
-    console.log('FLAG 1');
     token = token.replace('Bearer ', '');
     jwt.verify(token, JWT_KEY, async (err, decoded) => {
       if (err) {
         console.log('[Gateway-API][adminRoute][Error]', {err});
         return res.status(500).json({error: 'Invalid Token'});
       } else {
-        console.log('FLAG 2');
         req.decoded = decoded;
         const googleID = decoded.user;
         try {
-          console.log('FLAG 3');
           const {userId, user} = await getUser(googleID);
           if (user === null) {
             console.log('[Gateway-API][adminRoute][Error]', {error: 'User not found'});
@@ -132,7 +129,6 @@ exports.adminRoute = (req, res, next) => {
           }
 
           const isAdminFlag = isAdmin(user);
-          console.log('FLAG 3');
 
           if (isAdminFlag) {
             console.log('[Gateway-API][adminRoute][Response]', req.decoded);
@@ -152,5 +148,39 @@ exports.adminRoute = (req, res, next) => {
   } else {
     console.log('[Gateway-API][adminRoute][Error]', {error: 'No token provided'});
     return res.status(500).json({error: 'No token provided'});
+  }
+};
+
+/**
+ * @DixonOrtiz & @DiegoSepulveda
+ * Route only available for admins
+ * @description Define if the user accesing this route is an admin
+ * @param  {object} req Request
+ * @param  {object} res Response
+ * @param  {Function} next Callback function
+ */
+exports.checkUser = (req, res, next) => {
+  console.log('[Gateway-API][checkUser][Request]', req.params);
+  let token = req.headers['authorization'];
+
+  if (token) {
+    token = token.replace('Bearer ', '');
+
+    jwt.verify(token, JWT_KEY, (err, decoded) => {
+      if (err) {
+        console.log('[Gateway-API][checkUser][Error]', {err});
+        return res.status(500).json({error: 'Invalid Token'});
+      } else {
+        req.decoded = decoded;
+        const googleID = decoded.user;
+
+        if (req.body.user === googleID) {
+          console.log('[Gateway-API][checkUser][Response]', req.decoded);
+          next();
+        } else {
+          return res.status(500).json({error: "User doesn't match token"});
+        }
+      }
+    });
   }
 };
