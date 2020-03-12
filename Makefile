@@ -13,7 +13,7 @@ GOOGLE_CLIENT_SECRET := $$(cat $(ENV) | grep GOOGLE_CLIENT_SECRET | sed 's/"/ /g
 projectId := $$(cat $(ENV) | grep projectId | sed 's/"/ /g' | awk {'print $$3'})
 
 SVC=ioled-gateway-api
-PORT=3000
+PORT=5000
 
 version v:
 	@echo $(VERSION)
