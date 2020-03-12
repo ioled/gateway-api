@@ -13,7 +13,18 @@ const {getDevice, getUser, isAdmin} = require('../services/firestore');
 exports.signToken = (req, res) => {
   console.log('[Gateway-API][signToken][Request]', req.user);
   const token = jwt.sign({user: req.user.googleID}, JWT_KEY);
-  res.json({token});
+  const htmlWithEmbeddedJWT = `
+    <html>
+      <script>
+        // Save JWT to localStorage
+        window.localStorage.setItem('JWT_token', '${token}');
+        // Redirect browser to root of application
+        window.location.href = '/';
+      </script>
+    </html>
+    `;
+
+  res.send(htmlWithEmbeddedJWT);
   console.log('[Gateway-API][signToken][Response]', {token: token});
 };
 
