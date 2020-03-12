@@ -154,7 +154,7 @@ exports.checkUser = (req, res, next) => {
 
   if (token) {
     token = token.replace('Bearer ', '');
-    console.log('TOKEN DECODIFICADO:', token);
+
     jwt.verify(token, JWT_KEY, (err, decoded) => {
       if (err) {
         console.log('[Gateway-API][checkUser][Error]', {err});
@@ -163,9 +163,7 @@ exports.checkUser = (req, res, next) => {
         req.decoded = decoded;
         const googleID = decoded.user;
 
-        console.log('GOOGLE ID:', token);
-
-        if (req.body.userID === googleID) {
+        if (req.body.user === googleID) {
           console.log('[Gateway-API][checkUser][Response]', req.decoded);
           next();
         } else {

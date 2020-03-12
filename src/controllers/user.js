@@ -64,7 +64,7 @@ exports.saveDevice = async (req, res) => {
   console.log(`[Gateway API][POST][USER API][ /saveDevice ][Request]`, req.params, req.body);
 
   try {
-    const {duty, state, timerOn, timerOff, timerState, userID, deviceID, week, power} = req.body;
+    const {duty, state, timerOn, timerOff, timerState, user, deviceID, week, power} = req.body;
 
     const device = {
       duty,
@@ -72,7 +72,7 @@ exports.saveDevice = async (req, res) => {
       timerOn,
       timerOff,
       timerState,
-      userID,
+      user,
       deviceID,
       week,
       power,
