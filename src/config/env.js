@@ -40,8 +40,8 @@ if (googleClientSecret === undefined) {
   process.exit(1);
 }
 
-const projectId = process.env.projectId;
-if (projectId === undefined) {
+const PROJECT_ID = process.env.PROJECT_ID;
+if (PROJECT_ID === undefined) {
   console.log('[Gateway API][Error] No Project ID specified in the env variables');
   process.exit(1);
 }
@@ -54,5 +54,5 @@ module.exports = {
   USER_URL,
   googleClientID,
   googleClientSecret,
-  projectId,
+  PROJECT_ID,
 };
