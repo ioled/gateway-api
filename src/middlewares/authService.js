@@ -51,7 +51,7 @@ exports.protectedRoute = (req, res, next) => {
         req.decoded = decoded;
         const googleID = decoded.user;
         try {
-          const {userId, user} = await getUser(googleID);
+          const {user} = await getUser(googleID);
           if (user === null) {
             console.log('[Gateway-API][protectedRoute][Error]', {error: 'User not found'});
             return res.status(500).json({error: 'User not found'});
@@ -63,7 +63,7 @@ exports.protectedRoute = (req, res, next) => {
           let device = {};
 
           if (!isAdminFlag) {
-            device = await getDevice(userId);
+            device = await getDevice(googleID);
           } else {
             device = null;
           }
@@ -75,11 +75,18 @@ exports.protectedRoute = (req, res, next) => {
             return res.status(500).json({error: 'No devices were found'});
           }
 
+          let deviceFlag = 0;
           if (device != null) {
-            userDeviceId = device.deviceId;
+            for (let i = 0; i < device.length; i++) {
+              if (device[i].deviceID == deviceId) {
+                deviceFlag = !deviceFlag;
+              }
+            }
+
+            userDeviceId = device.deviceID;
           }
 
-          if (userDeviceId === deviceId || isAdminFlag) {
+          if (deviceFlag || isAdminFlag) {
             console.log('[Gateway-API][protectedRoute][Response]', req.decoded);
             next();
           } else {

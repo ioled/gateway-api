@@ -33,10 +33,10 @@ exports.getUser = async (googleID) => {
 exports.getDevice = async (userID) => {
   try {
     const snapshot = await devicesRef.where('user', '==', userID).get();
-    const device = snapshot.data()[0];
-    return device;
+    const devices = snapshot.docs.map((doc) => doc.data()); // Not tested yet
+    return devices;
   } catch (error) {
-    console.log('[Gateway-API][Firestore][getDevice]', error);
+    console.log('[Firestore Service][getDevices]', error);
     return null;
   }
 };
