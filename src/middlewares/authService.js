@@ -129,7 +129,7 @@ exports.adminRoute = (req, res, next) => {
         req.decoded = decoded;
         const googleID = decoded.user;
         try {
-          const {userId, user} = await getUser(googleID);
+          const {user} = await getUser(googleID);
           if (user === null) {
             console.log('[Gateway-API][adminRoute][Error]', {error: 'User not found'});
             return res.status(500).json({error: 'User not found'});
