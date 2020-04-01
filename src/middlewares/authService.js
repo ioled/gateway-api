@@ -13,19 +13,12 @@ const {getDevice, getUser, isAdmin} = require('../services/firestore');
 exports.signToken = (req, res) => {
   console.log('[Gateway-API][signToken][Request]', req.user);
   const token = jwt.sign({user: req.user.googleID}, JWT_KEY);
-  const htmlWithEmbeddedJWT = `
-    <html>
-      <script>
-        // Save JWT to localStorage
-        window.localStorage.setItem('JWT_token', '${token}');
-        // Redirect browser to root of application
-        window.location.href = '/';
-      </script>
-    </html>
-    `;
 
-  res.send(htmlWithEmbeddedJWT);
-  console.log('[Gateway-API][signToken][Response]', {token: token});
+  // const URL = 'http://localhost:3000/';
+  const URL = 'https://front-ioled-dot-ioled-dev-262215.appspot.com/';
+  const redirectURL = `${URL}?token=${token}`;
+  console.log('[Gateway-API][signToken][Response]', {token});
+  res.redirect(redirectURL);
 };
 
 /**
@@ -108,7 +101,7 @@ exports.protectedRoute = (req, res, next) => {
 };
 
 /**
- * @CristianValdivia & @DiegoSepulveda
+ * @@DiegoSepulveda
  * Route only available for admins
  * @description Define if the user accesing this route is an admin
  * @param  {object} req Request
