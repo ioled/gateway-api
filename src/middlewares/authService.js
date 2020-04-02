@@ -153,14 +153,14 @@ exports.adminRoute = (req, res, next) => {
 
 /**
  * @DixonOrtiz & @DiegoSepulveda
- * Route only available for admins
+ * Check the user
  * @description Define if the user accesing this route is an admin
  * @param  {object} req Request
  * @param  {object} res Response
  * @param  {Function} next Callback function
  */
 exports.checkUser = (req, res, next) => {
-  console.log('[Gateway-API][checkUser][Request]', req.params);
+  console.log('[Gateway-API][checkUser][Request]', req.params, req.body);
   let token = req.headers['authorization'];
 
   if (token) {
@@ -173,9 +173,8 @@ exports.checkUser = (req, res, next) => {
       } else {
         req.decoded = decoded;
         const googleID = decoded.user;
-
         if (req.body.user === googleID) {
-          console.log('[Gateway-API][checkUser][Response]', req.decoded);
+          console.log('[Gateway-API][checkUser][Response]', 'User check');
           next();
         } else {
           return res.status(500).json({error: "User doesn't match token"});
