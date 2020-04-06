@@ -92,7 +92,9 @@ exports.changeDevice = async (req, res) => {
     const {device} = req.body;
     const resp = await axios.post(`${USER_URL}/changeDevice`, device);
     console.log(`[Gateway API][POST][USER API][ /changeDevice ][Response]`, resp.config.data);
-    res.status(200).json(resp.config.data);
+    res.status(200).json({
+      message: 'Config updated',
+    });
   } catch (error) {
     console.log(`[Gateway API][POST][USER API][ /changeDevice ][Error]`, error);
     res.status(500).json({
