@@ -85,6 +85,22 @@ exports.saveDevice = async (req, res) => {
   }
 };
 
+exports.changeDevice = async (req, res) => {
+  console.log(`[Gateway API][POST][USER API][ /changeDevice ][Request]`, req.params, req.body);
+
+  try {
+    const {device} = req.body;
+    const resp = await axios.post(`${USER_URL}/changeDevice`, device);
+    console.log(`[Gateway API][POST][USER API][ /changeDevice ][Response]`, resp.config.data);
+    res.status(200).json(resp.config.data);
+  } catch (error) {
+    console.log(`[Gateway API][POST][USER API][ /changeDevice ][Error]`, error);
+    res.status(500).json({
+      error,
+    });
+  }
+};
+
 exports.linkUser = async (req, res) => {
   console.log(`[Gateway API][PUT][USER API][ /linkUser ][Request]`, req.params, res.body);
 
