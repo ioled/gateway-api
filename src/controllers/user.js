@@ -89,7 +89,7 @@ exports.changeDevice = async (req, res) => {
   console.log(`[Gateway API][POST][USER API][ /changeDevice ][Request]`, req.params, req.body);
 
   try {
-    const {device} = req.body;
+    const device = req.body;
     const resp = await axios.post(`${USER_URL}/changeDevice`, device);
     console.log(`[Gateway API][POST][USER API][ /changeDevice ][Response]`, resp.config.data);
     res.status(200).json({
