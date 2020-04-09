@@ -5,13 +5,13 @@ on: [pull_request]
 jobs:
   labeler:
     runs-on: ubuntu-latest
-    name: Pull Request size labeler
+    name: Label the PR size
     steps:
-      - uses: CodelyTV/pr-size-labeler@v1
+      - uses: codelytv/pr-size-labeler@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           xs_max_size: '2'
-          s_max_size: '5'
-          m_max_size: '10'
-          l_max_size: '20'
+          s_max_size: '10'
+          m_max_size: '20'
+          l_max_size: '30'
           fail_if_xl: 'false'
