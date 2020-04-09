@@ -1,20 +1,16 @@
 const {defaultGetController} = require('./default');
+const {HISTORY_URL} = require('../config/env');
 
 const apiName = 'History';
-const HISTORY_URL = process.env.HISTORY_URL;
-if (HISTORY_URL === undefined) {
-  console.log('[Gateway API][Error] No History URL specified in the env variables');
-}
 
-exports.getDayGraph = async (req, res) => {
-  const {device} = req.params;
-  const query = `/day/${device}`;
+exports.getDayData = async (req, res) => {
+  const {id} = req.params;
+
+  const query = `/day/${id}`;
 
   try {
-    const data = await defaultGetController(apiName, HISTORY_URL, query);
-    res.status(200).json({
-      data,
-    });
+    const {data} = await defaultGetController(apiName, HISTORY_URL, query);
+    res.status(200).json({historyDay: data});
   } catch (error) {
     res.status(500).json({
       error,
@@ -22,15 +18,13 @@ exports.getDayGraph = async (req, res) => {
   }
 };
 
-exports.getWeekGraph = async (req, res) => {
-  const {device} = req.params;
-  const query = `/week/${device}`;
+exports.getWeekData = async (req, res) => {
+  const {id} = req.params;
+  const query = `/week/${id}`;
 
   try {
-    const data = await defaultGetController(apiName, HISTORY_URL, query);
-    res.status(200).json({
-      data,
-    });
+    const {data} = await defaultGetController(apiName, HISTORY_URL, query);
+    res.status(200).json({historyWeek: data});
   } catch (error) {
     res.status(500).json({
       error,
@@ -38,15 +32,13 @@ exports.getWeekGraph = async (req, res) => {
   }
 };
 
-exports.getMonthGraph = async (req, res) => {
-  const {device} = req.params;
-  const query = `/week/${device}`;
+exports.getMonthData = async (req, res) => {
+  const {id} = req.params;
+  const query = `/week/${id}`;
 
   try {
-    const data = await defaultGetController(apiName, HISTORY_URL, query);
-    res.status(200).json({
-      data,
-    });
+    const {data} = await defaultGetController(apiName, HISTORY_URL, query);
+    res.status(200).json({historyMonth: data});
   } catch (error) {
     res.status(500).json({
       error,

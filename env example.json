@@ -1,6 +1,8 @@
 {
   "JWT_KEY": "...",
-  "MONGO_URI": "...",
+  "GOOGLE_CLIENT_ID": "...",
+  "GOOGLE_CLIENT_SECRET": "...",
+  "USER_URL": "...",
   "HISTORY_URL": "...",
   "DEVICE_CONTROL_URL": "..."
 }

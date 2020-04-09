@@ -1,23 +1,24 @@
-const {users, devices} = require('../services/mongodb');
-const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
-const {JWT_KEY} = require('../config/env');
+/**
+ * Send the user to google oauth flow to log in with a google account.
+ * @description To export 'passport.authenticate', it must be invoked with (req, res, next).
+ * @param  {object} req Request
+ * @param  {object} res Response
+ * @param  {Function} next Callback function
+ */
+exports.authRequest = (req, res, next) => {
+  console.log('[Gateway-API][authRequest][Request]');
+  passport.authenticate('google', {
+    session: false,
+    scope: ['profile', 'email'],
+  })(req, res, next);
+  console.log('[Gateway-API][authRequest][Response]', []);
+};
 
-exports.auth = async (req, res) => {
-  const {id, device} = req.params;
-  console.log(`[Gateway API][Auth][GET]`);
-  try {
-    const user = await users.findById(id);
-    const userDevice = await devices.findOne({_user: id});
-    if (userDevice.deviceId === device) {
-      const token = jwt.sign({user: user._id, device: userDevice._id}, JWT_KEY);
-      console.log(`[Gateway API][Auth][Response]`);
-      res.status(200).json({token});
-    } else {
-      res.status(500).json({error: 'No match between user and device'});
-    }
-  } catch (error) {
-    console.log(`[Gateway API][Auth][Error]`, error.message);
-    res.status(500).json({error});
-  }
+// Redirect to the server with the session established.
+exports.authCallback = (req, res, next) => {
+  console.log('[Gateway-API][authCallback][Request]');
+  passport.authenticate('google', {session: false})(req, res, next);
+  console.log('[Gateway-API][authCallback][Response]', []);
 };

@@ -3,26 +3,20 @@ const router = express.Router();
 
 const {
   getRegistry,
-  getDevices,
   getDeviceState,
   getDeviceConfig,
   upadateDeviceConfig,
-  getUserByDevice,
   getDeviceLastState,
   getDeviceLastConfig,
 } = require('../controllers/deviceControl');
 
-const {protectedRoute} = require('../middlewares/checkJWT');
+const {protectedRoute, adminRoute} = require('../middlewares/authService');
 
-router.use(protectedRoute);
-
-router.route('/deviceControl/registry').get(getRegistry);
-router.route('/deviceControl/devices').get(getDevices);
-router.route('/deviceControl/device/:id/state-history').get(getDeviceState);
-router.route('/deviceControl/device/:id/state-config').get(getDeviceConfig);
-router.route('/deviceControl/device/:id/config').put(upadateDeviceConfig);
-router.route('/deviceControl/device/:id/user').get(getUserByDevice);
-router.route('/deviceControl/device/:id/state').get(getDeviceLastState);
-router.route('/deviceControl/device/:id/config').get(getDeviceLastConfig);
+router.route('/deviceControl/registry').get(adminRoute, getRegistry);
+router.route('/deviceControl/device/:id/state-history').get(protectedRoute, getDeviceState);
+router.route('/deviceControl/device/:id/config-history').get(protectedRoute, getDeviceConfig);
+router.route('/deviceControl/device/:id/config').put(protectedRoute, upadateDeviceConfig);
+router.route('/deviceControl/device/:id/state').get(protectedRoute, getDeviceLastState);
+router.route('/deviceControl/device/:id/config').get(protectedRoute, getDeviceLastConfig);
 
 module.exports = router;
