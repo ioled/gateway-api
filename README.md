@@ -11,14 +11,13 @@ prueba 1
 
 ### User
 
-| N°  | Query                            | Method   | Response                                             | Only available to admin |
-| :-: | -------------------------------- | -------- | ---------------------------------------------------- | ----------------------- |
-|  1  | /user/currentUser                | **GET**  | Returns the current authenticated user               | No                      |
-|  2  | /user/devices                    | **GET**  | List all the registered devices for the current user | No                      |
-|  3  | /user/saveDevice                 | **POST** | Save device to the database                          | No                      |
-|  4  | /user/linkUser/:userId/:deviceID | **PUT**  | Set device user                                      | Yes                     |
-|  5  | /user/allDevices                 | **GET**  | All devices in the registry                          | Yes                     |
-|  6  | /user/device/:id/user            | **GET**  | Owner of the device's user information               | Yes                     |
+| N°  | Query              | Method   | Response                                             | Only available to admin |
+| :-: | ------------------ | -------- | ---------------------------------------------------- | ----------------------- |
+|  1  | /user/currentUser  | **GET**  | Returns the current authenticated user               | No                      |
+|  2  | /user/devices      | **GET**  | List all the registered devices for the current user | No                      |
+|  3  | /user/allDevices   | **GET**  | All devices in the registry                          | Yes                     |
+|  4  | /user/saveDevice   | **POST** | Save device to the database                          | No                      |
+|  5  | /user/changeDevice | **POST** | Change configuration in Firestore DB                 | No                      |
 
 ### History
 
@@ -30,14 +29,12 @@ prueba 1
 
 ### Device Control
 
-| N°  | Query                                    | Method  | Response                      | Only available to admin |
-| :-: | ---------------------------------------- | ------- | ----------------------------- | ----------------------- |
-|  1  | /deviceControl/registry                  | **GET** | All registries in the project | Yes                     |
-|  2  | /deviceControl/device/:id/state-history  | **GET** | Last 10 states stored         | No                      |
-|  3  | /deviceControl/device/:id/config-history | **GET** | Last 10 configs stored        | No                      |
-|  4  | /deviceControl/device/:id/config         | **PUT** | Update the config of device   | No                      |
-|  5  | /deviceControl/device/:id/state          | **GET** | Last state stored             | No                      |
-|  6  | /deviceControl/device/:id/config         | **GET** | Last config stored            | No                      |
+| N°  | Query                           | Method  | Response                      | Only available to admin |
+| :-: | ------------------------------- | ------- | ----------------------------- | ----------------------- |
+|  1  | /deviceControl/registry         | **GET** | All registries in the project | Yes                     |
+|  1  | /deviceControl/device           | **GET** | All devices in the project    | Yes                     |
+|  4  | /deviceControl/device/:id       | **PUT** | Update the config of device   | No                      |
+|  5  | /deviceControl/device/:id/state | **GET** | Last state stored             | No                      |
 
 ### Mailer
 
