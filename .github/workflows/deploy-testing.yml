@@ -1,16 +1,16 @@
-name: gcloud
+# name: gcloud
 
-on: [push]
+# on: [push]
 
-jobs:
-  deploy-testing:
-    runs-on: ubuntu-latest
-    name: deploy-testing
-    steps:
-      # - uses: actions/checkout@v12
-      - uses: actions-hub/gcloud@master
-        env:
-          PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
-          APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
-        with:
-          args: app deploy app-testing.yaml
+# jobs:
+#   deploy-testing:
+#     runs-on: ubuntu-latest
+#     name: deploy-testing
+#     steps:
+#       # - uses: actions/checkout@v12
+#       - uses: actions-hub/gcloud@master
+#         env:
+#           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
+#           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+#         with:
+#           args: app deploy app-testing.yaml

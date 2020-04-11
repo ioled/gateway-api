@@ -49,19 +49,13 @@ passport.use(
       // Search in the DB for the user.
       // const existingUser = await User.users.findOne({googleID});
       const existingUser = await getUser(googleID);
+      console.log(existingUser);
       // If the user exists, call passport done with the user.
       if (existingUser !== null) {
         return done(null, existingUser.user);
       }
 
       // If the user doesn't exist, then create a new user and call done with it.
-      // const newUser = await new User.users({
-      //   googleID,
-      //   name,
-      //   lastName,
-      //   email,
-      //   photo,
-      // }).save();
       const newUser = await saveUser({
         googleID,
         name,
@@ -69,7 +63,7 @@ passport.use(
         email,
         photo,
       });
-      console.log('[GOOGLE STRATEGY] (newUser)', newUser);
+
       done(null, newUser);
     },
   ),

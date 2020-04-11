@@ -12,10 +12,15 @@ const {getDevice, getUser, isAdmin} = require('../services/firestore');
  */
 exports.signToken = (req, res) => {
   console.log('[Gateway-API][signToken][Request]', req.user);
-  const token = jwt.sign({user: req.user.googleID}, JWT_KEY);
+  let token = '';
+  if (req.user.googleID !== undefined) {
+    token = jwt.sign({user: req.user.googleID}, JWT_KEY);
+  } else {
+    token = jwt.sign({user: req.user}, JWT_KEY);
+  }
 
-  // const URL = 'http://localhost:3000/';
-  const URL = 'https://front-ioled-dot-ioled-dev-262215.appspot.com/';
+  const URL = 'http://localhost:3000/';
+  // const URL = 'https://front-ioled-dot-ioled-dev-262215.appspot.com/';
   const redirectURL = `${URL}?token=${token}`;
   console.log('[Gateway-API][signToken][Response]', {token});
   res.redirect(redirectURL);
