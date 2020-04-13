@@ -21,5 +21,6 @@ jobs:
           JWT_KEY: ${{secrets.JWT_KEY}}
           GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
           GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
+        run: echo Hello world $JWT_KEY
         with:
           args: app deploy app-testing.yaml
