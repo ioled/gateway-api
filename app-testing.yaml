@@ -1,11 +1,11 @@
 runtime: nodejs10
 service: test-api-gateway
 env_variables:
-  HISTORY_URL: 'https://us-central1-ioled-dev-262215.cloudfunctions.net/TesthistoryApi'
-  MAILER_URL: 'https://mailer-api-dot-ioled-dev-262215.appspot.com/'
-  DEVICE_CONTROL_URL: 'https://us-central1-ioled-dev-262215.cloudfunctions.net/TestdeviceControlApi'
-  USER_URL: 'https://us-central1-ioled-dev-262215.cloudfunctions.net/TestuserApi'
+  PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
+  HISTORY_URL: ${{secrets.HISTORY_URL}}
+  MAILER_URL: ${{secrets.MAILER_URL}}
+  DEVICE_CONTROL_URL: ${{secrets.DEVICE_CONTROL_URL}}
+  USER_URL: ${{secrets.USER_URL}}
   JWT_KEY: ${{secrets.JWT_KEY}}
-  GOOGLE_CLIENT_SECRET: '3Umot6DDe2pmIwp_lq-H7EH7'
-  GOOGLE_CLIENT_ID: '384917616977-ki9fleqmcg3crte84alco425emkqpm05.apps.googleusercontent.com'
-  PROJECT_ID: 'ioled-dev-262215'
+  GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
+  GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}

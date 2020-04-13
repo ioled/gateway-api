@@ -1,7 +1,5 @@
 ## Routes in the Gateway
 
-prueba 1
-
 ### Auth
 
 | N°  | Query                 | Method  | Response                       |
