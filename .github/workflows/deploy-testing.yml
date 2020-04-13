@@ -14,13 +14,12 @@ jobs:
         env:
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
-          HISTORY_URL: ${{secrets.HISTORY_URL}}
-          MAILER_URL: ${{secrets.MAILER_URL}}
-          DEVICE_CONTROL_URL: ${{secrets.DEVICE_CONTROL_URL}}
-          USER_URL: ${{secrets.USER_URL}}
-          JWT_KEY: ${{secrets.JWT_KEY}}
-          GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
-          GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
-        uses: echo Hello world $JWT_KEY
+          # HISTORY_URL: ${{secrets.HISTORY_URL}}
+          # MAILER_URL: ${{secrets.MAILER_URL}}
+          # DEVICE_CONTROL_URL: ${{secrets.DEVICE_CONTROL_URL}}
+          # USER_URL: ${{secrets.USER_URL}}
+          # JWT_KEY: ${{secrets.JWT_KEY}}
+          # GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
+          # GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
         with:
           args: app deploy app-testing.yaml
