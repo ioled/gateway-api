@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: deploy-testing
     steps:
-      - uses: actions/checkout@v12
+      - uses: actions/checkout@v1
       - uses: actions-hub/gcloud@master
         env:
           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
