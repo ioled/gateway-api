@@ -7,10 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     name: deploy-testing
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-hub/gcloud@master
+      - name: Retrieving the repo
+        uses: actions/checkout@v1
+      - name: Run deployment
+        uses: actions-hub/gcloud@master
         env:
-          PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+          PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
+          HISTORY_URL: ${{secrets.HISTORY_URL}}
+          MAILER_URL: ${{secrets.MAILER_URL}}
+          DEVICE_CONTROL_URL: ${{secrets.DEVICE_CONTROL_URL}}
+          USER_URL: ${{secrets.USER_URL}}
+          JWT_KEY: ${{secrets.JWT_KEY}}
+          GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
+          GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
         with:
           args: app deploy app-testing.yaml
