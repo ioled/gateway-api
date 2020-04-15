@@ -1,3 +1,2 @@
 runtime: nodejs10
 service: test-api-gateway
-env_variables:

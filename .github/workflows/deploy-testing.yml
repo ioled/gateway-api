@@ -9,11 +9,10 @@ jobs:
     steps:
       - name: Retrieving the repo
         uses: actions/checkout@v1
-      - name: yq - portable yaml processor
+      - name: Edit app.yaml
         uses: mikefarah/yq@3.2.1
         with:
-          args: |
-            w -i /github/workspace/app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
+          cmd: yq w -i app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
