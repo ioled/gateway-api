@@ -13,10 +13,11 @@ jobs:
         uses: mikefarah/yq@3.2.1
         with:
           cmd: yq w -i app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
-        uses: mikefarah/yq@3.2.1
+      - uses: mikefarah/yq@3.2.1
         with:
-          cmd: yq w -i app.yaml env_variables.DEVICE_CONTROL_URL ${{secrets.DEVICE_CONTROL_URL}}
-            # 
+          cmd:
+            yq w -i app.yaml env_variables.DEVICE_CONTROL_URL ${{secrets.DEVICE_CONTROL_URL}}
+            #
             # yq w -i app.yaml env_variables.USER_URL ${{secrets.USER_URL}}
             # yq w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
             # yq w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
