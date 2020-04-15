@@ -11,8 +11,8 @@ jobs:
         uses: actions/checkout@v1
       - name: yq - portable yaml processor
         uses: mikefarah/yq@3.2.1
-          with:
-            args: w -i app.yaml env_variables.JWT.KEY ${{secrets.JWT_KEY}}
+        with:
+          args: w -i app.yaml env_variables.JWT.KEY ${{secrets.JWT_KEY}}
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
