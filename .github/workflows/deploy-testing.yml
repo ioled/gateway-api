@@ -1,11 +1,14 @@
 name: gcloud
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
 
 jobs:
   deploy-testing:
     runs-on: ubuntu-latest
-    name: deploy-testing
+    name: Deploy Dev
     steps:
       - name: Retrieving the repo
         uses: actions/checkout@v1
