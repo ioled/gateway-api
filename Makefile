@@ -1,6 +1,6 @@
 VERSION := $$(cat package.json | grep version | sed 's/"/ /g' | awk {'print $$3'})
 
-PROD := env.json
+PROD := env-prod.json
 DEV := env-dev.json
 ENV := $(DEV)
 
