@@ -12,13 +12,14 @@ jobs:
       - name: yq - portable yaml processor
         uses: mikefarah/yq@3.2.1
         with:
-          args: w -i app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
-          args: w -i app.yaml env_variables.DEVICE_CONTROL_URL ${{secrets.DEVICE_CONTROL_URL}}
-          args: w -i app.yaml env_variables.USER_URL ${{secrets.USER_URL}}
-          args: w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
-          args: w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
-          args: w -i app.yaml env_variables.GOOGLE_CLIENT_ID ${{secrets.GOOGLE_CLIENT_ID}}
-          args: w -i app.yaml env_variables.PROJECT_ID ${{secrets.PROJECT_ID}}
+          args: |
+            w -i app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
+            w -i app.yaml env_variables.DEVICE_CONTROL_URL ${{secrets.DEVICE_CONTROL_URL}}
+            w -i app.yaml env_variables.USER_URL ${{secrets.USER_URL}}
+            w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
+            w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
+            w -i app.yaml env_variables.GOOGLE_CLIENT_ID ${{secrets.GOOGLE_CLIENT_ID}}
+            w -i app.yaml env_variables.PROJECT_ID ${{secrets.PROJECT_ID}}
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
