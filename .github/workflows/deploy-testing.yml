@@ -9,10 +9,14 @@ jobs:
     steps:
       - name: Retrieving the repo
         uses: actions/checkout@v1
+      - name: yq - portable yaml processor
+        uses: mikefarah/yq@3.2.1
+          with:
+            args: w -i app.yaml env_variables.JWT.KEY ${{secrets.JWT_KEY}}
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
         with:
-          args: app deploy app-testing.yaml
+          args: app deploy app.yaml

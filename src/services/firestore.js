@@ -36,7 +36,7 @@ exports.getDevice = async (userID) => {
     const devices = snapshot.docs.map((doc) => doc.data()); // Not tested yet
     return devices;
   } catch (error) {
-    console.log('[Firestore Service][getDevices]', error);
+    console.log('[Gateway-API][Firestore][getDevices]', error);
     return null;
   }
 };
@@ -49,11 +49,11 @@ exports.isAdmin = (user) => {
 exports.saveUser = async (user) => {
   try {
     const ref = await usersRef.add(user);
-    console.log('[Firestore Service] [Save User] New User Added:', user.googleID);
+    console.log('[Gateway-API][Firestore][Save User] New User Added:', user.googleID);
     return user.googleID;
   } catch (error) {
     console.log(
-      '[Firestore Service] [Save User] [Error] There was an error saving the new user',
+      '[Gateway-API][Firestore][Save User][Error] There was an error saving the new user',
       error,
     );
     throw new Error(error);
