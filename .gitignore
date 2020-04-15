@@ -1,4 +1,7 @@
 node_modules
-app.yaml
-env.json
+# app.yaml
+# app-testing.yaml
+app-features.yaml
+env-prod.json
 env-dev.json
+google-cloud-service-account.json

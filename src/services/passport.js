@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const {googleClientID} = require('../config/env');
 const {googleClientSecret} = require('../config/env');
 
-const User = require('./mongodb');
+const {getUser, saveUser} = require('./firestore');
 
 /**
  * Determines which data of the user object is stored in the session.
@@ -14,13 +14,12 @@ const User = require('./mongodb');
  * @param done The callback function used by passport.
  */
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.googleID);
 });
 
-passport.deserializeUser((id, done) => {
-  User.users.findById(id).then((user) => {
-    done(null, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  const user = await getUser(id);
+  done(null, user);
 });
 
 // Tell passport to use the google strategy for oath.
@@ -48,20 +47,23 @@ passport.use(
       } = profile;
 
       // Search in the DB for the user.
-      const existingUser = await User.users.findOne({googleID});
+      // const existingUser = await User.users.findOne({googleID});
+      const existingUser = await getUser(googleID);
+      console.log(existingUser);
       // If the user exists, call passport done with the user.
-      if (existingUser) {
-        return done(null, existingUser);
+      if (existingUser !== null) {
+        return done(null, existingUser.user);
       }
 
-      // If th user doesnt, create a new user and call done with it.
-      const newUser = await new User.users({
+      // If the user doesn't exist, then create a new user and call done with it.
+      const newUser = await saveUser({
         googleID,
         name,
         lastName,
         email,
         photo,
-      }).save();
+      });
+
       done(null, newUser);
     },
   ),

@@ -1,4 +1,3 @@
-const cookieSession = require('cookie-session');
 const passport = require('passport');
 const routes = require('../routes');
 const bodyParser = require('body-parser');
