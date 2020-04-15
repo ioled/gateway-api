@@ -32,16 +32,12 @@ docker-compose co:
 	@docker-compose up
 
 deploy d:
-	@echo "[App Engine Deployment] Deploying App"
-	@gcloud app deploy
+	@echo "[PROD][App Engine Deployment] Deploying App"
+	@gcloud app deploy app-prod.yaml 
 
 deploy-test dt:
-	@echo "[TESTING] [App Engine Deployment] Deploying App"
-	@gcloud app deploy app-testing.yaml
-
-deploy-features df:
-	@echo "[NEW FEATURES] [App Engine Deployment] Deploying App"
-	@gcloud app deploy app-features.yaml
+	@echo "[DEV][App Engine Deployment] Deploying App"
+	@gcloud app deploy app-dev.yaml
 
 run r:
 	@echo "[Running] Running service with $(ENV)"

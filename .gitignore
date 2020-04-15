@@ -1,7 +1,6 @@
 node_modules
-# app.yaml
-# app-testing.yaml
-app-features.yaml
+app-prod.yaml
+app-dev.yaml
 env-prod.json
 env-dev.json
 google-cloud-service-account.json

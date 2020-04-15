@@ -1,14 +1,14 @@
-name: gcloud
+name: Deploy production
 
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   deploy-testing:
     runs-on: ubuntu-latest
-    name: Deploy Dev
+    name: Deploy PROD
     steps:
       - name: Retrieving the repo
         uses: actions/checkout@v1
@@ -40,6 +40,10 @@ jobs:
         uses: mikefarah/yq@3.2.1
         with:
           cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.GCLOUD_PROJECT_ID}}
+      - name: Prepare app.yaml
+        uses: mikefarah/yq@3.2.1
+        with:
+          cmd: yq w -i app-dev.yaml service api-gateway
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
