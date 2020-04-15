@@ -36,7 +36,7 @@ jobs:
       - name: Edit PROJECT_ID
         uses: mikefarah/yq@3.2.1
         with:
-          cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.PROJECT_ID}}
+          cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.GCLOUD_PROJECT_ID}}
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
