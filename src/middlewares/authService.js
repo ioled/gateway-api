@@ -20,7 +20,8 @@ exports.signToken = (req, res) => {
   }
 
   // const URL = 'http://localhost:3000/';
-  const URL = 'https://front-ioled-dot-ioled-dev-262215.appspot.com/';
+  // const URL = 'https://front-ioled-dot-ioled-dev-262215.appspot.com/';
+  const URL = 'https://dev-front-ioled-dot-ioled-dev-262215.appspot.com/';
   const redirectURL = `${URL}?token=${token}`;
   console.log('[Gateway-API][signToken][Response]', {token});
   res.redirect(redirectURL);

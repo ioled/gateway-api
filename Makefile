@@ -35,7 +35,7 @@ deploy d:
 	@echo "[PROD][App Engine Deployment] Deploying App"
 	@gcloud app deploy app-prod.yaml 
 
-deploy-test dt:
+deploy-dev dev:
 	@echo "[DEV][App Engine Deployment] Deploying App"
 	@gcloud app deploy app-dev.yaml
 

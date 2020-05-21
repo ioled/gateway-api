@@ -17,8 +17,8 @@ router.route('/user/currentUser').get(currentUser);
 router.route('/user/devices').get(getDevices);
 router.route('/user/saveDevice').post(checkUser, saveDevice);
 router.route('/user/changeDevice').post(changeDevice);
-router.route('/user/linkUser/:userId/:deviceId').put(adminRoute, linkUser);
-router.route('/user/allDevices').get(adminRoute, getAllDevices);
-router.route('/user/device/:id/user').get(adminRoute, getUserByDevice);
+router.route('/user/linkUser/:userId/:deviceId').put(linkUser);
+router.route('/user/allDevices').get(getAllDevices);
+router.route('/user/device/:id/user').get(getUserByDevice);
 
 module.exports = router;

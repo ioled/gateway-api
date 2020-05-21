@@ -48,6 +48,11 @@ exports.isAdmin = (user) => {
 
 exports.saveUser = async (user) => {
   try {
+    if (user.lastName === undefined) {
+      console.log('[Gateway-API][Firestore][Save User] Invalid lastName');
+      user.lastName = '.';
+    }
+
     const ref = await usersRef.add(user);
     console.log('[Gateway-API][Firestore][Save User] New User Added:', user.googleID);
     return user.googleID;
